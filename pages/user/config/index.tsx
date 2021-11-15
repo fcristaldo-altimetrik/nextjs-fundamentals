@@ -1,9 +1,15 @@
+import axios from "axios";
 import { NavBar } from "components/NavBar";
+import { GetServerSideProps, NextPage } from "next";
 import React, { FormEventHandler, useState } from "react";
 
-function UserConfigPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+interface UserConfigProps {
+  user: { name: string; email: string };
+}
+
+const UserConfigPage: NextPage<UserConfigProps> = ({ user }) => {
+  const [name, setName] = useState(user.name || "");
+  const [email, setEmail] = useState(user.email || "");
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -35,6 +41,13 @@ function UserConfigPage() {
       </form>
     </div>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await axios.get("http://localhost:3000/api/user");
+  return {
+    props: { user: { ...res.data } },
+  };
+};
 
 export default UserConfigPage;
