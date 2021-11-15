@@ -1,13 +1,10 @@
 import React from "react";
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import axios from "axios";
+import { User } from "interfaces";
 
 interface UserProfileProps {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
+  user: User;
 }
 const UserProfilePage: NextPage<UserProfileProps> = ({ user }) => {
   return (

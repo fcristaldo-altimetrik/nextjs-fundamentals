@@ -1,10 +1,11 @@
 import axios from "axios";
 import { NavBar } from "components/NavBar";
+import { User } from "interfaces";
 import { GetServerSideProps, NextPage } from "next";
 import React, { FormEventHandler, useState } from "react";
 
 interface UserConfigProps {
-  user: { name: string; email: string };
+  user: User;
 }
 
 const UserConfigPage: NextPage<UserConfigProps> = ({ user }) => {

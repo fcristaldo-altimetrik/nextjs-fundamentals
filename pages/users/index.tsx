@@ -2,13 +2,10 @@ import { NextPage, GetServerSideProps } from "next";
 import React from "react";
 import axios from "axios";
 import Link from "next/link";
+import { User } from "interfaces";
 
 interface UsersPageProps {
-  users: {
-    id: string;
-    name: string;
-    email: string;
-  }[];
+  users: User[];
 }
 const UsersPage: NextPage<UsersPageProps> = ({ users }) => {
   return (
