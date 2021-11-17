@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import Link from "next/link";
 import { User } from "interfaces";
+import Head from "next/head";
 
 interface UsersPageProps {
   users: User[];
@@ -10,6 +11,13 @@ interface UsersPageProps {
 const UsersPage: NextPage<UsersPageProps> = ({ users }) => {
   return (
     <div>
+      <Head>
+        <title>Users Page</title>
+        <meta
+          name="description"
+          content="Find every user registered in this platform"
+        />
+      </Head>
       <h1>Users</h1>
       <div>
         {users.map((user) => (
