@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import Link from "next/link";
 import { User } from "interfaces";
+import { getCookieByName } from "utils/AuthCookie";
 
 interface UsersPageProps {
   users: User[];
@@ -25,7 +26,12 @@ const UsersPage: NextPage<UsersPageProps> = ({ users }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await axios.get("http://localhost:3000/api/users");
+  const cookies = context.req.headers.cookie?.split("; ") || [];
+  const auth = getCookieByName(cookies, "x-auth-token");
+
+  const res = await axios.get("http://localhost:3000/api/users", {
+    headers: { Authorization: auth },
+  });
   return {
     props: { users: [...res.data] },
   };
